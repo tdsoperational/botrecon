@@ -1,6 +1,6 @@
 ## Summary
-Botrecon is a reconnaissance tool to scrape servers mostly, specifically C2 servers. 
-Simply said, you can control the data and basically the whole server with it, assuming the bot has admin permissions. 
+Botrecon is a reconnaissance tool to scrape servers mostly, specifically C2 servers.  
+Simply said, you can control the data and basically the whole server with it, assuming the bot has admin permissions.  
 
 This shouldn't be a concern, since discord rats need admin anyway to create channels.
 You can get tokens fairly easily, since they are hardcoded into the binary of the rat.
