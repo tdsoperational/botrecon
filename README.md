@@ -1,6 +1,30 @@
-## Botrecon
+## Summary
+Botrecon is a reconnaissance tool to scrape servers mostly, specifically C2 servers. 
+Simply said, you can control the data and basically the whole server with it, assuming the bot has admin permissions. 
 
-A reconnaissance tool to find out stuff about a server using a bot. Mostly used against C2 servers to harvest info, but can be used with any bot.
+This shouldn't be a concern, since discord rats need admin anyway to create channels.
+You can get tokens fairly easily, since they are hardcoded into the binary of the rat.
 
-Have fun with it, use !USAGE for usage info, happy threat hunting!
-- tdsoperational
+> [!WARNING]
+> Joining those servers on your main account is **a BAD idea**.
+> Because the servers are against discords ToS, since they use discord as command and control.
+
+> [!TIP]
+> Tool is still in development, feel free to share bugs in the [issues tab](https://github.com/tdsoperational/botrecon/issues)
+
+## Features
+- Dump messages from all channels or specific servers.
+- List recon info (server info, members, roles).
+- Send messages to servers.
+- List all members in a specified server.
+- Create a invite link for a specified server.
+- Grant admin to specified member.
+- Delete channels and ban members from servers.
+- Dump all files from servers.
+- Leave all servers the bot is in.
+
+Use !USAGE for commands ;)
+
+If you encounter them using a webhook to deliver stolen information, use [webhook.c](https://github.com/tdsoperational/botrecon/blob/main/webhook.c) to fully delete it. 
+If you want to disable a bot, use [this](https://tdsmental.pythonanywhere.com)
+If you need to submit them in bulk, use the [API](https://tdsmental.pythonanywhere.com/api-info)
