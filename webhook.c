@@ -5,7 +5,6 @@
 #include <string.h>
 
 #pragma comment(lib, "wininet.lib")
-
 #define MAX_URL_LENGTH 2048
 
 void printerr() {
