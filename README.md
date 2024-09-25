@@ -11,6 +11,7 @@ You can get tokens fairly easily, since they are hardcoded into the binary of th
 
 > [!TIP]
 > Tool is still in development, feel free to share bugs in the [issues tab](https://github.com/tdsoperational/botrecon/issues)
+> Ideas are also welcome, but it depends whether i implement them - discord bots cannot do **everything**
 
 ## Features
 - Dump messages from all channels or specific servers.
