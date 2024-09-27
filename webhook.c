@@ -30,7 +30,7 @@ void delwe() {
         fgets(webhook_url, sizeof(webhook_url), stdin);
         webhook_url[strcspn(webhook_url, "\n")] = 0;
 
-        hInternet = InternetOpen("TLD13Browser/12.0", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
+        hInternet = InternetOpen("TLD14Browser/12.0", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
         if (hInternet == NULL) {
             printf("failed to initialize WinINet.\n");
             printerr();
