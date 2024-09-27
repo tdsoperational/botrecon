@@ -6,25 +6,25 @@ This shouldn't be a concern, since discord rats need admin anyway to create chan
 You can get tokens fairly easily, since they are hardcoded into the binary of the rat.
 
 > [!WARNING]
-> Joining those servers on your main account is **a BAD idea**.
-> Because the servers are against discords ToS, since they use discord as command and control.
+> Joining those servers on your main account is **a BAD idea**.  
+> The servers are against discords ToS, since they use discord as command and control.  
 
 > [!TIP]
-> Tool is still in development, feel free to share bugs in the [issues tab](https://github.com/tdsoperational/botrecon/issues)
-> Ideas are also welcome, but it depends whether i implement them - discord bots cannot do **everything**
+> Tool is still in development, feel free to share bugs in the [issues tab](https://github.com/tdsoperational/botrecon/issues)  
+> Ideas are also welcome, but it depends whether i implement them - discord bots cannot do **everything**  
 
 ## Features
-- Dump messages from all channels or specific servers.
-- List recon info (server info, members, roles).
-- Send messages to servers.
-- List all members in a specified server.
-- Create a invite link for a specified server.
-- Grant admin to specified member.
-- Delete channels and ban members from servers.
-- Dump all files from servers.
-- Leave all servers the bot is in.
+- Dump messages from all channels or specific servers.  
+- List recon info (server info, members, roles).  
+- Send messages to servers.  
+- List all members in a specified server.  
+- Create a invite link for a specified server.  
+- Grant admin to specified member.  
+- Delete channels and ban members from servers.  
+- Dump all files from servers.  
+- Leave all servers the bot is in.  
 
-Use !USAGE for commands ;)
+Use !USAGE for commands ;)  
 
 If you encounter them using a webhook to deliver stolen information, use [webhook.c](https://github.com/tdsoperational/botrecon/blob/main/webhook.c) to fully delete it.  
 If you want to disable a bot, use [this](https://tdsmental.pythonanywhere.com)  
