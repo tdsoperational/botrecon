@@ -22,7 +22,8 @@ You can get tokens fairly easily, since they are hardcoded into the binary of th
 - Grant admin to specified member.  
 - Delete channels and ban members from servers.  
 - Dump all files from servers.  
-- Leave all servers the bot is in.  
+- Leave all servers the bot is in.
+- Delete all webhooks the bot is in.  
 
 Use !USAGE for commands ;)  
 
