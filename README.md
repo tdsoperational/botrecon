@@ -27,6 +27,6 @@ You can get tokens fairly easily, since they are hardcoded into the binary of th
 
 Use !USAGE for commands ;)  
 
-If you encounter them using a webhook to deliver stolen information, use [webhook.c](https://github.com/tdsoperational/botrecon/blob/main/webhook.c) to fully delete it.  
+If you encounter them using a webhook to deliver stolen information, use [webhook.c](https://github.com/tdsoperational/botrecon/blob/main/webhook.c) to fully delete it, or use !DELHOOK.  
 If you want to disable a bot, use [this](https://tdsmental.pythonanywhere.com)  
 If you need to submit them in bulk, use the [API](https://tdsmental.pythonanywhere.com/api-info)  
