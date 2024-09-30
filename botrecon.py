@@ -233,12 +233,19 @@ async def dumpchan(channel):
         print(f"could not dump attachments from {channel.name}: {e}")
 
 async def download_attachment(attachment):
+    base_name, ext = os.path.splitext(attachment.filename)
     file_path = os.path.join('dumps', attachment.filename)
+
+    counter = 1
+    while os.path.exists(file_path):
+        file_path = os.path.join('dumps', f"{base_name} ({counter}){ext}")
+        counter += 1
+
     try:
         await attachment.save(file_path)
-        print(f"downloaded {attachment.filename}")
+        print(f"downloaded {file_path}")
     except Exception as e:
-        print(f"fauled to download {attachment.filename}: {e}")
+        print(f"failed to download {attachment.filename}: {e}")
 
 async def usage(command=None):
     usage_info = {
