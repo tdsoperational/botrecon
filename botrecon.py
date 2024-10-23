@@ -337,7 +337,7 @@ async def main():
     token = input("Enter C2 token: ")
     try:
         await client.start(token)
-    except Exception as e:
+    except Exception:
         await client.close()
         print("Improper token has been passed!")
 
